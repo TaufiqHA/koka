@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Koka - Full Menu</title>
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#FF0000',secondary:'#FFFFFF'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+input:focus {
+    outline: none;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.category-button.active {
+    background-color: #FF0000;
+    color: white;
+}
+.product-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+</style>
+</head>
+<body class="min-h-screen bg-gray-50">
+<!-- Header -->
+<header class="fixed top-0 left-0 right-0 bg-white shadow-md z-50">
+    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+        <a href="#" class="text-primary text-3xl font-['Pacifico']">Koka</a>
+        <!-- Desktop Navigation -->
+        <nav class="hidden md:flex space-x-8">
+            <a href="index.html" data-readdy="true" class="text-gray-800 font-medium hover:text-primary transition duration-300">Home</a>
+            <a href="menu.html" class="text-primary font-medium border-b-2 border-primary">Menu</a>
+            <a href="location.html" class="text-gray-800 font-medium hover:text-primary transition duration-300">Locations</a>
+            <a href="#" class="text-gray-800 font-medium hover:text-primary transition duration-300">About Us</a>
+        </nav>
+        <!-- Order Now Button (Desktop) -->
+        <button class="hidden md:block bg-primary text-white px-6 py-2 font-semibold !rounded-button hover:bg-red-600 transition duration-300 whitespace-nowrap">Order Now</button>
+        <!-- Mobile Navigation Button -->
+        <div class="md:hidden">
+            <button id="mobile-menu-button" class="w-10 h-10 flex items-center justify-center text-gray-800">
+                <i class="ri-menu-line ri-lg"></i>
+            </button>
+        </div>
+    </div>
+    <!-- Mobile Navigation Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg">
+        <div class="container mx-auto px-4 py-3 flex flex-col space-y-4">
+            <a href="index.html" data-readdy="true" class="text-gray-800 font-medium hover:text-primary transition duration-300">Home</a>
+            <a href="menu.html" class="text-primary font-medium">Menu</a>
+            <a href="location.html" class="text-gray-800 font-medium hover:text-primary transition duration-300">Locations</a>
+            <a href="#" class="text-gray-800 font-medium hover:text-primary transition duration-300">About Us</a>
+            <button class="bg-primary text-white px-6 py-2 font-semibold !rounded-button hover:bg-red-600 transition duration-300 whitespace-nowrap">Order Now</button>
+        </div>
+    </div>
+</header>
+
+<!-- Page Title -->
+<div class="pt-24 pb-6 bg-white">
+    <div class="container mx-auto px-4">
+        <div class="flex flex-col md:flex-row justify-between items-center mb-4">
+            <div>
+                <h1 class="text-3xl font-bold text-gray-900">Our Menu</h1>
+                <p class="text-gray-600 mt-2">Discover our full range of premium cold brews and more</p>
+            </div>
+            <a href="index.html" data-readdy="true" class="flex items-center text-primary hover:text-red-700 transition duration-300 mt-4 md:mt-0">
+                <i class="ri-arrow-left-line ri-lg mr-2"></i>
+                <span>Back to Home</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Filter Section -->
+<div class="bg-white border-t border-b border-gray-200 py-4 sticky top-16 z-40 shadow-sm">
+    <div class="container mx-auto px-4">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+            <!-- Category Filter -->
+            <div class="flex items-center space-x-2 overflow-x-auto pb-2 md:pb-0 w-full md:w-auto">
+                <button class="category-button active px-4 py-2 !rounded-full text-sm font-medium whitespace-nowrap">All Items</button>
+                <button class="category-button bg-gray-100 px-4 py-2 !rounded-full text-sm font-medium text-gray-700 hover:bg-gray-200 whitespace-nowrap">Cold Brews</button>
+                <button class="category-button bg-gray-100 px-4 py-2 !rounded-full text-sm font-medium text-gray-700 hover:bg-gray-200 whitespace-nowrap">Specialty Drinks</button>
+                <button class="category-button bg-gray-100 px-4 py-2 !rounded-full text-sm font-medium text-gray-700 hover:bg-gray-200 whitespace-nowrap">Food Items</button>
+            </div>
+            
+            <!-- Sort and Search -->
+            <div class="flex items-center space-x-3 w-full md:w-auto">
+                <!-- Sort Dropdown -->
+                <div class="relative">
+                    <button id="sort-button" class="flex items-center justify-between bg-white border border-gray-300 !rounded-button px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 w-full md:w-44">
+                        <span>Sort by: Featured</span>
+                        <i class="ri-arrow-down-s-line ri-lg ml-2"></i>
+                    </button>
+                    <div id="sort-dropdown" class="hidden absolute right-0 mt-2 w-44 bg-white shadow-lg !rounded-button z-10">
+                        <div class="py-1">
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Featured</a>
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Price: Low to High</a>
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Price: High to Low</a>
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Most Popular</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Search -->
+                <div class="relative flex-grow md:max-w-xs">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <i class="ri-search-line text-gray-400"></i>
+                    </div>
+                    <input type="text" placeholder="Search menu..." class="w-full pl-10 pr-4 py-2 border border-gray-300 !rounded-button text-sm">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Menu Content -->
+<div class="container mx-auto px-4 py-12">
+    <!-- Cold Brews Section -->
+    <div class="mb-16">
+        <div class="flex items-center mb-8">
+            <h2 class="text-2xl font-bold">Cold Brews</h2>
+            <div class="ml-4 h-0.5 bg-primary flex-grow max-w-md"></div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Product 1 -->
+            <div class="product-card bg-white rounded-lg shadow-md overflow-hidden">
+                <img src="https://readdy.ai/api/search-image?query=A%2520stylish%2520glass%2520of%2520cold%2520brew%2520coffee%2520with%2520ice%2520cubes%2520on%2520a%2520clean%2520white%2520background.%2520The%2520coffee%2520has%2520a%2520rich%252C%2520dark%2520amber%2520color%2520with%2520a%2520smooth%2520texture.%2520The%2520glass%2520has%2520condensation%2520on%2520the%2520outside%252C%2520suggesting%2520its%2520refreshingly%2520cold.%2520The%2520presentation%2520is%2520minimalist%2520and%2520elegant%252C%2520perfect%2520for%2520a%2520premium%2520coffee%2520brand&width=600&height=400&seq=2&orientation=landscape" alt="Classic Cold Brew" class="w-full h-64 object-cover object-top">
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2">Classic Cold Brew</h3>
+                    <p class="text-gray-600 mb-4">Our signature slow-steeped cold brew, smooth with naturally sweet notes. Brewed for 12 hours to perfection.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-primary font-bold text-lg">$4.95</span>
+                        <button class="bg-primary text-white px-4 py-2 !rounded-button hover:bg-red-600 transition duration-300 whitespace-nowrap">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 2 -->
+            <div class="product-card bg-white rounded-lg shadow-md overflow-hidden">
+                <img src="https://readdy.ai/api/search-image?query=A%2520glass%2520of%2520vanilla%2520sweet%2520cream%2520cold%2520brew%2520coffee%2520on%2520a%2520clean%2520white%2520background.%2520The%2520coffee%2520is%2520layered%2520with%2520a%2520creamy%2520white%2520top%2520gradually%2520blending%2520into%2520dark%2520coffee%2520below.%2520The%2520glass%2520has%2520condensation%2520droplets%2520and%2520is%2520garnished%2520with%2520a%2520small%2520vanilla%2520bean.%2520The%2520presentation%2520is%2520elegant%2520and%2520appetizing%252C%2520perfect%2520for%2520a%2520premium%2520coffee%2520brand&width=600&height=400&seq=3&orientation=landscape" alt="Vanilla Sweet Cream Cold Brew" class="w-full h-64 object-cover object-top">
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2">Vanilla Sweet Cream</h3>
+                    <p class="text-gray-600 mb-4">Cold brew topped with house-made vanilla sweet cream, creating a cascading effect. Rich and indulgent.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-primary font-bold text-lg">$5.50</span>
+                        <button class="bg-primary text-white px-4 py-2 !rounded-button hover:bg-red-600 transition duration-300 whitespace-nowrap">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 3 -->
+            <div class="product-card bg-white rounded-lg shadow-md overflow-hidden">
+                <img src="https://readdy.ai/api/search-image?query=A%2520glass%2520of%2520caramel%2520cold%2520brew%2520coffee%2520on%2520a%2520clean%2520white%2520background.%2520The%2520coffee%2520has%2520a%2520rich%2520caramel-colored%2520layer%2520on%2520top%2520gradually%2520blending%2520into%2520dark%2520coffee%2520below.%2520The%2520glass%2520has%2520condensation%2520droplets%2520and%2520is%2520garnished%2520with%2520a%2520light%2520drizzle%2520of%2520caramel%2520sauce.%2520The%2520presentation%2520is%2520elegant%2520and%2520indulgent%252C%2520perfect%2520for%2520a%2520premium%2520coffee%2520brand&width=600&height=400&seq=4&orientation=landscape" alt="Caramel Cold Foam Cold Brew" class="w-full h-64 object-cover object-top">
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2">Caramel Cold Foam</h3>
+                    <p class="text-gray-600 mb-4">Our cold brew topped with a cloud of cold foam and a drizzle of caramel. Sweet and satisfying.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-primary font-bold text-lg">$5.75</span>
+                        <button class="bg-primary text-white px-4 py-2 !rounded-button hover:bg-red-600 transition duration-300 whitespace-nowrap">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 4 -->
+            <div class="product-card bg-white rounded-lg shadow-md overflow-hidden">
+                <img src="https://readdy.ai/api/search-image?query=A%2520glass%2520of%2520mocha%2520cold%2520brew%2520coffee%2520on%2520a%2520clean%2520white%2520background.%2520The%2520coffee%2520has%2520a%2520rich%2520chocolate%2520brown%2520color%2520with%2520a%2520layer%2520of%2520chocolate%2520drizzle%2520on%2520top.%2520The%2520glass%2520has%2520condensation%2520droplets%2520and%2520is%2520garnished%2520with%2520a%2520light%2520dusting%2520of%2520cocoa%2520powder.%2520The%2520presentation%2520is%2520elegant%2520and%2520indulgent%252C%2520perfect%2520for%2520a%2520premium%2520coffee%2520brand&width=600&height=400&seq=5&orientation=landscape" alt="Mocha Cold Brew" class="w-full h-64 object-cover object-top">
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2">Mocha Cold Brew</h3>
+                    <p class="text-gray-600 mb-4">Our signature cold brew infused with rich chocolate and topped with a light chocolate drizzle.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-primary font-bold text-lg">$5.95</span>
+                        <button class="bg-primary text-white px-4 py-2 !rounded-button hover:bg-red-600 transition duration-300 whitespace-nowrap">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 5 -->
+            <div class="product-card bg-white rounded-lg shadow-md overflow-hidden">
+                <img src="https://readdy.ai/api/search-image?query=A%2520glass%2520of%2520nitro%2520cold%2520brew%2520coffee%2520on%2520a%2520clean%2520white%2520background.%2520The%2520coffee%2520has%2520a%2520rich%2520dark%2520color%2520with%2520a%2520creamy%2520cascade%2520effect%2520and%2520a%2520thick%2520crema%2520on%2520top%2520like%2520a%2520Guinness%2520beer.%2520The%2520glass%2520has%2520condensation%2520droplets.%2520The%2520presentation%2520is%2520elegant%2520and%2520sophisticated%252C%2520perfect%2520for%2520a%2520premium%2520coffee%2520brand&width=600&height=400&seq=6&orientation=landscape" alt="Nitro Cold Brew" class="w-full h-64 object-cover object-top">
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2">Nitro Cold Brew</h3>
+                    <p class="text-gray-600 mb-4">Cold brew infused with nitrogen for a velvety smooth texture and naturally sweet flavor profile.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-primary font-bold text-lg">$5.50</span>
+                        <button class="bg-primary text-white px-4 py-2 !rounded-button hover:bg-red-600 transition duration-300 whitespace-nowrap">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 6 -->
+            <div class="product-card bg-white rounded-lg shadow-md overflow-hidden">
+                <img src="https://readdy.ai/api/search-image?query=A%2520glass%2520bottle%2520of%2520cold%2520brew%2520concentrate%2520on%2520a%2520clean%2520white%2520background.%2520The%2520bottle%2520is%2520elegant%2520and%2520minimalist%2520with%2520a%2520simple%2520label.%2520The%2520coffee%2520inside%2520is%2520very%2520dark%2520and%2520rich%2520looking.%2520The%2520presentation%2520is%2520premium%2520and%2520artisanal%252C%2520perfect%2520for%2520a%2520high-end%2520coffee%2520brand&width=600&height=400&seq=7&orientation=landscape" alt="Cold Brew Concentrate" class="w-full h-64 object-cover object-top">
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2">Cold Brew Concentrate</h3>
+                    <p class="text-gray-600 mb-4">Our signature cold brew in concentrated form. Dilute with water or milk for a perfect at-home experience.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-primary font-bold text-lg">$12.95</span>
+                        <button class="bg-primary text-white px-4 py-2 !rounded-button hover:bg-red-600 transition duration-300 whitespace-nowrap">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Specialty Drinks Section -->
+    <div class="mb-16">
+        <div class="flex items-center mb-8">
+            <h2 class="text-2xl font-bold">Specialty Drinks</h2>
+            <div class="ml-4 h-0.5 bg-primary flex-grow max-w-md"></div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Product 1 -->
+            <div class="product-card bg-white rounded-lg shadow-md overflow-hidden">
+                <img src="https://readdy.ai/api/search-image?query=A%2520glass%2520of%2520iced%2520matcha%2520latte%2520on%2520a%2520clean%2520white%2520background.%2520The%2520drink%2520has%2520a%2520vibrant%2520green%2520color%2520with%2520a%2520layer%2520of%2520white%2520milk%2520on%2520top.%2520The%2520glass%2520has%2520condensation%2520droplets%2520and%2520is%2520garnished%2520with%2520a%2520light%2520dusting%2520of%2520matcha%2520powder.%2520The%2520presentation%2520is%2520elegant%2520and%2520refreshing%252C%2520perfect%2520for%2520a%2520premium%2520beverage%2520brand&width=600&height=400&seq=8&orientation=landscape" alt="Iced Matcha Latte" class="w-full h-64 object-cover object-top">
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2">Iced Matcha Latte</h3>
+                    <p class="text-gray-600 mb-4">Premium Japanese matcha whisked to perfection and served over ice with your choice of milk.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-primary font-bold text-lg">$5.95</span>
+                        <button class="bg-primary text-white px-4 py-2 !rounded-button hover:bg-red-600 transition duration-300 whitespace-nowrap">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 2 -->
+            <div class="product-card bg-white rounded-lg shadow-md overflow-hidden">
+                <img src="https://readdy.ai/api/search-image?query=A%2520glass%2520of%2520iced%2520chai%2520latte%2520on%2520a%2520clean%2520white%2520background.%2520The%2520drink%2520has%2520a%2520rich%2520amber%2520color%2520with%2520visible%2520spices%2520and%2520a%2520creamy%2520top.%2520The%2520glass%2520has%2520condensation%2520droplets%2520and%2520is%2520garnished%2520with%2520a%2520cinnamon%2520stick.%2520The%2520presentation%2520is%2520elegant%2520and%2520aromatic%252C%2520perfect%2520for%2520a%2520premium%2520beverage%2520brand&width=600&height=400&seq=9&orientation=landscape" alt="Iced Chai Latte" class="w-full h-64 object-cover object-top">
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2">Iced Chai Latte</h3>
+                    <p class="text-gray-600 mb-4">Spiced black tea concentrate mixed with cold milk and served over ice. Aromatic and refreshing.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-primary font-bold text-lg">$5.50</span>
+                        <button class="bg-primary text-white px-4 py-2 !rounded-button hover:bg-red-600 transition duration-300 whitespace-nowrap">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 3 -->
+            <div class="product-card bg-white rounded-lg shadow-md overflow-hidden">
+                <img src="https://readdy.ai/api/search-image?query=A%2520glass%2520of%2520iced%2520lavender%2520latte%2520on%2520a%2520clean%2520white%2520background.%2520The%2520drink%2520has%2520a%2520light%2520purple%2520hue%2520with%2520a%2520creamy%2520top.%2520The%2520glass%2520has%2520condensation%2520droplets%2520and%2520is%2520garnished%2520with%2520a%2520small%2520sprig%2520of%2520fresh%2520lavender.%2520The%2520presentation%2520is%2520elegant%2520and%2520soothing%252C%2520perfect%2520for%2520a%2520premium%2520beverage%2520brand&width=600&height=400&seq=10&orientation=landscape" alt="Lavender Latte" class="w-full h-64 object-cover object-top">
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2">Lavender Latte</h3>
+                    <p class="text-gray-600 mb-4">Our signature espresso with house-made lavender syrup and your choice of milk. Floral and calming.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-primary font-bold text-lg">$6.25</span>
+                        <button class="bg-primary text-white px-4 py-2 !rounded-button hover:bg-red-600 transition duration-300 whitespace-nowrap">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 4 -->
+            <div class="product-card bg-white rounded-lg shadow-md overflow-hidden">
+                <img src="https://readdy.ai/api/search-image?query=A%2520glass%2520of%2520iced%2520honey%2520oat%2520milk%2520latte%2520on%2520a%2520clean%2520white%2520background.%2520The%2520drink%2520has%2520a%2520light%2520golden%2520color%2520with%2520a%2520creamy%2520top.%2520The%2520glass%2520has%2520condensation%2520droplets%2520and%2520is%2520garnished%2520with%2520a%2520small%2520drizzle%2520of%2520honey.%2520The%2520presentation%2520is%2520elegant%2520and%2520wholesome%252C%2520perfect%2520for%2520a%2520premium%2520beverage%2520brand&width=600&height=400&seq=11&orientation=landscape" alt="Honey Oat Milk Latte" class="w-full h-64 object-cover object-top">
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2">Honey Oat Milk Latte</h3>
+                    <p class="text-gray-600 mb-4">Espresso with local honey and creamy oat milk. A perfect balance of sweetness and richness.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-primary font-bold text-lg">$6.50</span>
+                        <button class="bg-primary text-white px-4 py-2 !rounded-button hover:bg-red-600 transition duration-300 whitespace-nowrap">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 5 -->
+            <div class="product-card bg-white rounded-lg shadow-md overflow-hidden">
+                <img src="https://readdy.ai/api/search-image?query=A%2520glass%2520of%2520fresh%2520fruit%2520smoothie%2520on%2520a%2520clean%2520white%2520background.%2520The%2520smoothie%2520has%2520a%2520vibrant%2520red%2520and%2520pink%2520color%2520from%2520berries.%2520The%2520glass%2520has%2520condensation%2520droplets%2520and%2520is%2520garnished%2520with%2520fresh%2520berries%2520on%2520top.%2520The%2520presentation%2520is%2520elegant%2520and%2520refreshing%252C%2520perfect%2520for%2520a%2520premium%2520beverage%2520brand&width=600&height=400&seq=12&orientation=landscape" alt="Berry Protein Smoothie" class="w-full h-64 object-cover object-top">
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2">Berry Protein Smoothie</h3>
+                    <p class="text-gray-600 mb-4">Mixed berries, banana, plant protein, and almond milk blended to perfection. Nutritious and delicious.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-primary font-bold text-lg">$7.25</span>
+                        <button class="bg-primary text-white px-4 py-2 !rounded-button hover:bg-red-600 transition duration-300 whitespace-nowrap">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 6 -->
+            <div class="product-card bg-white rounded-lg shadow-md overflow-hidden">
+                <img src="https://readdy.ai/api/search-image?query=A%2520glass%2520of%2520sparkling%2520lemonade%2520on%2520a%2520clean%2520white%2520background.%2520The%2520drink%2520has%2520a%2520clear%2520light%2520yellow%2520color%2520with%2520visible%2520bubbles%2520and%2520ice%2520cubes.%2520The%2520glass%2520has%2520condensation%2520droplets%2520and%2520is%2520garnished%2520with%2520a%2520lemon%2520slice%2520and%2520mint%2520leaves.%2520The%2520presentation%2520is%2520elegant%2520and%2520refreshing%252C%2520perfect%2520for%2520a%2520premium%2520beverage%2520brand&width=600&height=400&seq=13&orientation=landscape" alt="Sparkling Lavender Lemonade" class="w-full h-64 object-cover object-top">
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2">Sparkling Lavender Lemonade</h3>
+                    <p class="text-gray-600 mb-4">House-made lemonade infused with lavender syrup and topped with sparkling water. Refreshingly floral.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-primary font-bold text-lg">$4.95</span>
+                        <button class="bg-primary text-white px-4 py-2 !rounded-button hover:bg-red-600 transition duration-300 whitespace-nowrap">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Food Items Section -->
+    <div>
+        <div class="flex items-center mb-8">
+            <h2 class="text-2xl font-bold">Food Items</h2>
+            <div class="ml-4 h-0.5 bg-primary flex-grow max-w-md"></div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Product 1 -->
+            <div class="product-card bg-white rounded-lg shadow-md overflow-hidden">
+                <img src="https://readdy.ai/api/search-image?query=A%2520freshly%2520baked%2520almond%2520croissant%2520on%2520a%2520clean%2520white%2520background.%2520The%2520croissant%2520has%2520a%2520golden%2520brown%2520flaky%2520exterior%2520dusted%2520with%2520powdered%2520sugar%2520and%2520sliced%2520almonds.%2520The%2520presentation%2520is%2520elegant%2520and%2520appetizing%252C%2520perfect%2520for%2520a%2520premium%2520bakery%2520brand&width=600&height=400&seq=14&orientation=landscape" alt="Almond Croissant" class="w-full h-64 object-cover object-top">
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2">Almond Croissant</h3>
+                    <p class="text-gray-600 mb-4">Buttery croissant filled with almond cream and topped with sliced almonds and powdered sugar.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-primary font-bold text-lg">$4.75</span>
+                        <button class="bg-primary text-white px-4 py-2 !rounded-button hover:bg-red-600 transition duration-300 whitespace-nowrap">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 2 -->
+            <div class="product-card bg-white rounded-lg shadow-md overflow-hidden">
+                <img src="https://readdy.ai/api/search-image?query=A%2520freshly%2520baked%2520blueberry%2520muffin%2520on%2520a%2520clean%2520white%2520background.%2520The%2520muffin%2520has%2520a%2520golden%2520brown%2520top%2520with%2520visible%2520blueberries%2520and%2520a%2520light%2520sugar%2520sprinkle.%2520The%2520presentation%2520is%2520elegant%2520and%2520appetizing%252C%2520perfect%2520for%2520a%2520premium%2520bakery%2520brand&width=600&height=400&seq=15&orientation=landscape" alt="Blueberry Muffin" class="w-full h-64 object-cover object-top">
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2">Blueberry Muffin</h3>
+                    <p class="text-gray-600 mb-4">Moist muffin packed with fresh blueberries and topped with a light sugar sprinkle. Made fresh daily.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-primary font-bold text-lg">$3.95</span>
+                        <button class="bg-primary text-white px-4 py-2 !rounded-button hover:bg-red-600 transition duration-300 whitespace-nowrap">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 3 -->
+            <div class="product-card bg-white rounded-lg shadow-md overflow-hidden">
+                <img src="https://readdy.ai/api/search-image?query=A%2520fresh%2520avocado%2520toast%2520on%2520a%2520clean%2520white%2520background.%2520The%2520toast%2520features%2520thick-cut%2520artisanal%2520bread%2520topped%2520with%2520smashed%2520avocado%252C%2520red%2520pepper%2520flakes%252C%2520and%2520microgreens.%2520The%2520presentation%2520is%2520elegant%2520and%2520appetizing%252C%2520perfect%2520for%2520a%2520premium%2520cafe%2520brand&width=600&height=400&seq=16&orientation=landscape" alt="Avocado Toast" class="w-full h-64 object-cover object-top">
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2">Avocado Toast</h3>
+                    <p class="text-gray-600 mb-4">Sourdough toast topped with smashed avocado, red pepper flakes, microgreens, and a squeeze of lemon.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-primary font-bold text-lg">$8.95</span>
+                        <button class="bg-primary text-white px-4 py-2 !rounded-button hover:bg-red-600 transition duration-300 whitespace-nowrap">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 4 -->
+            <div class="product-card bg-white rounded-lg shadow-md overflow-hidden">
+                <img src="https://readdy.ai/api/search-image?query=A%2520fresh%2520breakfast%2520sandwich%2520on%2520a%2520clean%2520white%2520background.%2520The%2520sandwich%2520features%2520a%2520toasted%2520English%2520muffin%2520with%2520egg%252C%2520cheese%252C%2520and%2520avocado.%2520The%2520presentation%2520is%2520elegant%2520and%2520appetizing%252C%2520perfect%2520for%2520a%2520premium%2520cafe%2520brand&width=600&height=400&seq=17&orientation=landscape" alt="Breakfast Sandwich" class="w-full h-64 object-cover object-top">
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2">Breakfast Sandwich</h3>
+                    <p class="text-gray-600 mb-4">Toasted English muffin with egg, white cheddar, avocado, and arugula. A perfect breakfast option.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-primary font-bold text-lg">$7.95</span>
+                        <button class="bg-primary text-white px-4 py-2 !rounded-button hover:bg-red-600 transition duration-300 whitespace-nowrap">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 5 -->
+            <div class="product-card bg-white rounded-lg shadow-md overflow-hidden">
+                <img src="https://readdy.ai/api/search-image?query=A%2520fresh%2520yogurt%2520parfait%2520on%2520a%2520clean%2520white%2520background.%2520The%2520parfait%2520is%2520served%2520in%2520a%2520clear%2520glass%2520with%2520layers%2520of%2520Greek%2520yogurt%252C%2520granola%252C%2520and%2520mixed%2520berries.%2520The%2520presentation%2520is%2520elegant%2520and%2520appetizing%252C%2520perfect%2520for%2520a%2520premium%2520cafe%2520brand&width=600&height=400&seq=18&orientation=landscape" alt="Yogurt Parfait" class="w-full h-64 object-cover object-top">
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2">Yogurt Parfait</h3>
+                    <p class="text-gray-600 mb-4">Layers of Greek yogurt, house-made granola, fresh berries, and a drizzle of local honey.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-primary font-bold text-lg">$6.50</span>
+                        <button class="bg-primary text-white px-4 py-2 !rounded-button hover:bg-red-600 transition duration-300 whitespace-nowrap">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 6 -->
+            <div class="product-card bg-white rounded-lg shadow-md overflow-hidden">
+                <img src="https://readdy.ai/api/search-image?query=A%2520fresh%2520chocolate%2520chip%2520cookie%2520on%2520a%2520clean%2520white%2520background.%2520The%2520cookie%2520is%2520large%2520with%2520a%2520golden%2520brown%2520edge%2520and%2520a%2520slightly%2520soft%2520center%2520with%2520visible%2520chocolate%2520chunks.%2520The%2520presentation%2520is%2520elegant%2520and%2520appetizing%252C%2520perfect%2520for%2520a%2520premium%2520bakery%2520brand&width=600&height=400&seq=19&orientation=landscape" alt="Chocolate Chip Cookie" class="w-full h-64 object-cover object-top">
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2">Chocolate Chip Cookie</h3>
+                    <p class="text-gray-600 mb-4">Large cookie with crisp edges and a soft center, packed with premium chocolate chunks. Baked fresh daily.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-primary font-bold text-lg">$3.50</span>
+                        <button class="bg-primary text-white px-4 py-2 !rounded-button hover:bg-red-600 transition duration-300 whitespace-nowrap">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="bg-primary text-white">
+    <div class="container mx-auto px-4 py-12">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Company Info -->
+            <div>
+                <h3 class="text-2xl font-['Pacifico'] mb-6">Koka</h3>
+                <p class="mb-4">Premium cold brew coffee crafted with passion and served with style.</p>
+                <div class="flex space-x-4 mt-6">
+                    <a href="#" class="w-10 h-10 flex items-center justify-center bg-white bg-opacity-20 rounded-full hover:bg-opacity-30 transition duration-300">
+                        <i class="ri-instagram-line ri-lg"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 flex items-center justify-center bg-white bg-opacity-20 rounded-full hover:bg-opacity-30 transition duration-300">
+                        <i class="ri-facebook-fill ri-lg"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 flex items-center justify-center bg-white bg-opacity-20 rounded-full hover:bg-opacity-30 transition duration-300">
+                        <i class="ri-twitter-x-line ri-lg"></i>
+                    </a>
+                </div>
+            </div>
+            <!-- Quick Links -->
+            <div>
+                <h3 class="text-xl font-bold mb-6">Quick Links</h3>
+                <ul class="space-y-3">
+                    <li><a href="#" class="hover:underline">Menu</a></li>
+                    <li><a href="#" class="hover:underline">About Us</a></li>
+                    <li><a href="#" class="hover:underline">Locations</a></li>
+                    <li><a href="#" class="hover:underline">Careers</a></li>
+                    <li><a href="#" class="hover:underline">Contact Us</a></li>
+                </ul>
+            </div>
+            <!-- Newsletter -->
+            <div>
+                <h3 class="text-xl font-bold mb-6">Stay Updated</h3>
+                <p class="mb-4">Subscribe to our newsletter for the latest updates and offers.</p>
+                <div class="flex">
+                    <input type="email" placeholder="Your email address" class="px-4 py-2 w-full text-gray-800 border-none !rounded-l-button">
+                    <button class="bg-gray-800 text-white px-4 py-2 !rounded-r-button hover:bg-gray-700 transition duration-300 whitespace-nowrap">Subscribe</button>
+                </div>
+                <div class="mt-6">
+                    <h4 class="font-medium mb-3">Payment Methods</h4>
+                    <div class="flex space-x-3">
+                        <i class="ri-visa-fill ri-lg"></i>
+                        <i class="ri-mastercard-fill ri-lg"></i>
+                        <i class="ri-paypal-fill ri-lg"></i>
+                        <i class="ri-apple-fill ri-lg"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-white border-opacity-20 mt-10 pt-6 text-center text-sm">
+            <p>&copy; 2025 Koka (Kold Caffeine). All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Mobile menu toggle
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    mobileMenuButton.addEventListener('click', function() {
+        mobileMenu.classList.toggle('hidden');
+        // Toggle icon between menu and close
+        const icon = mobileMenuButton.querySelector('i');
+        if (icon.classList.contains('ri-menu-line')) {
+            icon.classList.remove('ri-menu-line');
+            icon.classList.add('ri-close-line');
+        } else {
+            icon.classList.remove('ri-close-line');
+            icon.classList.add('ri-menu-line');
+        }
+    });
+    
+    // Sort dropdown toggle
+    const sortButton = document.getElementById('sort-button');
+    const sortDropdown = document.getElementById('sort-dropdown');
+    
+    sortButton.addEventListener('click', function() {
+        sortDropdown.classList.toggle('hidden');
+    });
+    
+    // Close sort dropdown when clicking outside
+    document.addEventListener('click', function(event) {
+        if (!sortButton.contains(event.target) && !sortDropdown.contains(event.target)) {
+            sortDropdown.classList.add('hidden');
+        }
+    });
+    
+    // Category filter buttons
+    const categoryButtons = document.querySelectorAll('.category-button');
+    
+    categoryButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Remove active class from all buttons
+            categoryButtons.forEach(btn => {
+                btn.classList.remove('active');
+                btn.classList.add('bg-gray-100');
+                btn.classList.add('text-gray-700');
+            });
+            
+            // Add active class to clicked button
+            this.classList.add('active');
+            this.classList.remove('bg-gray-100');
+            this.classList.remove('text-gray-700');
+        });
+    });
+});
+</script>
+</body>
+</html>

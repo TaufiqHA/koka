@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Koka - Kold Caffeine</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: { primary: "#FF0000", secondary: "#FFFFFF" },
+            borderRadius: {
+              none: "0px",
+              sm: "4px",
+              DEFAULT: "8px",
+              md: "12px",
+              lg: "16px",
+              xl: "20px",
+              "2xl": "24px",
+              "3xl": "32px",
+              full: "9999px",
+              button: "8px",
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <style>
+      :where([class^="ri-"])::before {
+        content: "\f3c2";
+      }
+      body {
+        font-family: "Montserrat", sans-serif;
+      }
+      .hero-section {
+        background-image: linear-gradient(
+            rgba(0, 0, 0, 0.5),
+            rgba(0, 0, 0, 0.5)
+          ),
+          url("https://readdy.ai/api/search-image?query=A%20modern%20coffee%20shop%20interior%20with%20stylish%20decor%2C%20featuring%20baristas%20preparing%20cold%20brew%20coffee.%20The%20space%20has%20a%20minimalist%20design%20with%20wooden%20elements%2C%20soft%20lighting%2C%20and%20customers%20enjoying%20their%20drinks%20in%20a%20cozy%20atmosphere.%20The%20image%20has%20a%20warm%2C%20inviting%20ambiance%20with%20subtle%20red%20accents%20throughout%20the%20decor.&width=1920&height=1080&seq=coffee1&orientation=landscape");
+        background-size: cover;
+        background-position: center;
+      }
+      input:focus {
+        outline: none;
+      }
+      input[type="number"]::-webkit-inner-spin-button,
+      input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body class="bg-white">
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 bg-white shadow-md z-50">
+      <div
+        class="container mx-auto px-4 py-3 flex justify-between items-center"
+      >
+        <a href="#" class="text-primary text-3xl font-['Pacifico']">Koka</a>
+        <!-- Desktop Navigation -->
+        <nav class="hidden md:flex space-x-8">
+          <a
+            href="index.html"
+            data-readdy="true"
+            class="text-gray-800 font-medium hover:text-primary border-b-2 border-primary text-primary transition duration-300"
+            >Home</a
+          >
+          <a
+            href="menu.html"
+            class="font-medium text-gray-800 hover:text-primary transition duration-300"
+            >Menu</a
+          >
+          <a
+            href="location.html"
+            class="text-gray-800 font-medium hover:text-primary transition duration-300"
+            >Locations</a
+          >
+          <a
+            href="#"
+            class="text-gray-800 font-medium hover:text-primary transition duration-300"
+            >About Us</a
+          >
+        </nav>
+        <!-- Order Now Button (Desktop) -->
+        <button
+          class="hidden md:block bg-primary text-white px-6 py-2 font-semibold !rounded-button hover:bg-red-600 transition duration-300 whitespace-nowrap"
+        >
+          Order Now
+        </button>
+        <!-- Mobile Navigation Button -->
+        <div class="md:hidden">
+          <button
+            id="mobile-menu-button"
+            class="w-10 h-10 flex items-center justify-center text-gray-800"
+          >
+            <i class="ri-menu-line ri-lg"></i>
+          </button>
+        </div>
+      </div>
+      <!-- Mobile Navigation Menu -->
+      <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg">
+        <div class="container mx-auto px-4 py-3 flex flex-col space-y-4">
+          <a
+            href="index.html"
+            data-readdy="true"
+            class="text-gray-800 font-medium hover:text-primary transition duration-300"
+            >Home</a
+          >
+          <a href="menu.html" class="text-primary font-medium">Menu</a>
+          <a
+            href="location.html"
+            class="text-gray-800 font-medium hover:text-primary transition duration-300"
+            >Locations</a
+          >
+          <a
+            href="#"
+            class="text-gray-800 font-medium hover:text-primary transition duration-300"
+            >About Us</a
+          >
+          <button
+            class="bg-primary text-white px-6 py-2 font-semibold !rounded-button hover:bg-red-600 transition duration-300 whitespace-nowrap"
+          >
+            Order Now
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section min-h-screen flex items-center pt-16">
+      <div class="container mx-auto px-4 py-20 w-full">
+        <div class="max-w-2xl mx-auto text-center">
+          <h1
+            class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4"
+          >
+            Experience Premium Cold Brew
+          </h1>
+          <p class="text-xl text-white mb-8">
+            Crafted with passion, served with style
+          </p>
+          <button
+            class="bg-primary text-white px-8 py-3 !rounded-button font-medium text-lg hover:bg-red-700 transition-colors whitespace-nowrap"
+          >
+            Order Now
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section id="menu" class="py-20 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold mb-2">
+            Our Signature Drinks
+          </h2>
+          <div class="w-24 h-1 bg-primary mx-auto"></div>
+          <p class="mt-4 text-gray-600 max-w-2xl mx-auto">
+            Discover our handcrafted cold brew coffee and specialty drinks,
+            prepared with the finest beans and ingredients.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Product 1 -->
+          <div
+            class="bg-white rounded-lg shadow-md overflow-hidden transition-transform hover:scale-105"
+          >
+            <div class="h-64 overflow-hidden">
+              <img
+                src="https://readdy.ai/api/search-image?query=A%20glass%20of%20classic%20cold%20brew%20coffee%20with%20ice%20cubes%20on%20a%20wooden%20table%20with%20a%20minimalist%20white%20background.%20The%20coffee%20has%20a%20rich%20dark%20color%20with%20a%20slight%20gradient.%20The%20glass%20has%20condensation%20on%20the%20outside%2C%20suggesting%20it%20is%20perfectly%20chilled.%20The%20presentation%20is%20elegant%20and%20simple.&width=600&height=400&seq=coffee2&orientation=portrait"
+                alt="Classic Cold Brew"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-2">Classic Cold Brew</h3>
+              <p class="text-gray-600 mb-4">
+                Our signature cold brew steeped for 24 hours for a smooth, rich
+                flavor with low acidity.
+              </p>
+              <div class="flex justify-between items-center">
+                <span class="text-primary font-bold text-xl">$4.95</span>
+                <button
+                  class="bg-primary text-white px-4 py-2 !rounded-button font-medium hover:bg-red-600 transition-colors whitespace-nowrap"
+                >
+                  Add to Cart
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 2 -->
+          <div
+            class="bg-white rounded-lg shadow-md overflow-hidden transition-transform hover:scale-105"
+          >
+            <div class="h-64 overflow-hidden">
+              <img
+                src="https://readdy.ai/api/search-image?query=A%20glass%20of%20vanilla%20sweet%20cream%20cold%20brew%20coffee%20on%20a%20wooden%20table%20with%20a%20minimalist%20white%20background.%20The%20coffee%20has%20a%20beautiful%20gradient%20from%20dark%20at%20the%20bottom%20to%20light%20cream%20swirls%20at%20the%20top.%20The%20glass%20has%20condensation%20on%20the%20outside.%20The%20presentation%20is%20elegant%20and%20visually%20appealing%20with%20the%20cream%20creating%20artistic%20patterns%20in%20the%20coffee.&width=600&height=400&seq=coffee3&orientation=portrait"
+                alt="Vanilla Sweet Cream Cold Brew"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-2">Vanilla Sweet Cream</h3>
+              <p class="text-gray-600 mb-4">
+                Our classic cold brew topped with house-made vanilla sweet cream
+                for a silky smooth finish.
+              </p>
+              <div class="flex justify-between items-center">
+                <span class="text-primary font-bold text-xl">$5.50</span>
+                <button
+                  class="bg-primary text-white px-4 py-2 !rounded-button font-medium hover:bg-red-600 transition-colors whitespace-nowrap"
+                >
+                  Add to Cart
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 3 -->
+          <div
+            class="bg-white rounded-lg shadow-md overflow-hidden transition-transform hover:scale-105"
+          >
+            <div class="h-64 overflow-hidden">
+              <img
+                src="https://readdy.ai/api/search-image?query=A%20glass%20of%20caramel%20cold%20foam%20cold%20brew%20coffee%20on%20a%20wooden%20table%20with%20a%20minimalist%20white%20background.%20The%20coffee%20has%20a%20beautiful%20gradient%20from%20dark%20at%20the%20bottom%20to%20light%20caramel-colored%20foam%20at%20the%20top.%20The%20glass%20has%20condensation%20on%20the%20outside.%20A%20drizzle%20of%20caramel%20sauce%20decorates%20the%20inside%20of%20the%20glass.%20The%20presentation%20is%20elegant%20and%20visually%20appealing%20with%20the%20foam%20creating%20a%20perfect%20top%20layer.&width=600&height=400&seq=coffee4&orientation=portrait"
+                alt="Caramel Cold Foam Cold Brew"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-2">Caramel Cold Foam</h3>
+              <p class="text-gray-600 mb-4">
+                Cold brew topped with a velvety caramel cold foam and a drizzle
+                of caramel sauce.
+              </p>
+              <div class="flex justify-between items-center">
+                <span class="text-primary font-bold text-xl">$5.95</span>
+                <button
+                  class="bg-primary text-white px-4 py-2 !rounded-button font-medium hover:bg-red-600 transition-colors whitespace-nowrap"
+                >
+                  Add to Cart
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center mt-12">
+          <a
+            href="menu.html"
+            class="bg-white text-primary border-2 border-primary px-8 py-3 !rounded-button font-medium hover:bg-primary hover:text-white transition-colors whitespace-nowrap"
+            >View Full Menu</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <div class="flex flex-col lg:flex-row items-center gap-12">
+          <div class="w-full lg:w-1/2">
+            <img
+              src="https://readdy.ai/api/search-image?query=A%20barista%20carefully%20preparing%20cold%20brew%20coffee%20in%20a%20modern%20coffee%20shop.%20The%20barista%20is%20using%20specialized%20equipment%20like%20a%20Toddy%20brewer%20or%20cold%20brew%20tower.%20The%20scene%20shows%20the%20meticulous%20process%20of%20making%20cold%20brew%2C%20with%20coffee%20grounds%2C%20filtered%20water%2C%20and%20glass%20containers.%20The%20coffee%20shop%20has%20a%20clean%2C%20minimalist%20design%20with%20red%20accent%20elements.%20The%20lighting%20is%20warm%20and%20creates%20an%20inviting%20atmosphere.&width=800&height=600&seq=coffee5&orientation=landscape"
+              alt="Coffee Preparation"
+              class="rounded-lg shadow-lg w-full h-auto"
+            />
+          </div>
+          <div class="w-full lg:w-1/2">
+            <h2 class="text-3xl md:text-4xl font-bold mb-2">Our Story</h2>
+            <div class="w-24 h-1 bg-primary mb-6"></div>
+            <p class="text-gray-700 mb-6">
+              Founded in 2020, Koka (Kold Caffeine) was born from a passion for
+              exceptional cold brew coffee. Our journey began in a small garage
+              in Portland, where our founder Emily Chen spent countless nights
+              perfecting the cold brew process.
+            </p>
+            <p class="text-gray-700 mb-6">
+              What sets us apart is our commitment to quality and innovation. We
+              source only the finest single-origin beans, use filtered water,
+              and steep our cold brew for a full 24 hours to extract the perfect
+              flavor profile – rich, smooth, and never bitter.
+            </p>
+            <p class="text-gray-700 mb-6">
+              Today, with multiple locations across the city, we remain
+              dedicated to our original mission: serving the best cold brew
+              coffee while creating a warm, welcoming space for our community.
+            </p>
+            <button
+              class="bg-primary text-white px-6 py-3 !rounded-button font-medium hover:bg-red-600 transition-colors whitespace-nowrap"
+            >
+              Learn More
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Location Section -->
+    <section id="locations" class="py-20 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold mb-2">Find Us</h2>
+          <div class="w-24 h-1 bg-primary mx-auto"></div>
+          <p class="mt-4 text-gray-600 max-w-2xl mx-auto">
+            Visit one of our locations to experience our premium cold brew
+            coffee and friendly atmosphere.
+          </p>
+        </div>
+
+        <div class="rounded-lg overflow-hidden shadow-lg mb-12 h-96">
+          <div
+            class="w-full h-full"
+            style="
+              background-image: url('https://public.readdy.ai/gen_page/map_placeholder_1280x720.png');
+              background-size: cover;
+              background-position: center;
+            "
+          ></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Location 1 -->
+          <div
+            class="bg-white rounded-lg shadow-md p-6 transition-transform hover:scale-105"
+          >
+            <div
+              class="w-12 h-12 flex items-center justify-center bg-primary rounded-full mb-4"
+            >
+              <i class="ri-map-pin-line ri-lg text-white"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-2">Downtown</h3>
+            <p class="text-gray-600 mb-2">
+              123 Main Street, Portland, OR 97201
+            </p>
+            <p class="text-gray-600 mb-4">
+              Monday - Friday: 6:30 AM - 7:00 PM<br />Saturday - Sunday: 7:00 AM
+              - 8:00 PM
+            </p>
+            <p class="text-gray-600 flex items-center">
+              <span class="w-6 h-6 flex items-center justify-center mr-2">
+                <i class="ri-phone-line text-primary"></i>
+              </span>
+              (503) 555-1234
+            </p>
+          </div>
+
+          <!-- Location 2 -->
+          <div
+            class="bg-white rounded-lg shadow-md p-6 transition-transform hover:scale-105"
+          >
+            <div
+              class="w-12 h-12 flex items-center justify-center bg-primary rounded-full mb-4"
+            >
+              <i class="ri-map-pin-line ri-lg text-white"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-2">Pearl District</h3>
+            <p class="text-gray-600 mb-2">
+              456 Pearl Avenue, Portland, OR 97209
+            </p>
+            <p class="text-gray-600 mb-4">
+              Monday - Friday: 6:30 AM - 7:00 PM<br />Saturday - Sunday: 7:00 AM
+              - 8:00 PM
+            </p>
+            <p class="text-gray-600 flex items-center">
+              <span class="w-6 h-6 flex items-center justify-center mr-2">
+                <i class="ri-phone-line text-primary"></i>
+              </span>
+              (503) 555-5678
+            </p>
+          </div>
+
+          <!-- Location 3 -->
+          <div
+            class="bg-white rounded-lg shadow-md p-6 transition-transform hover:scale-105"
+          >
+            <div
+              class="w-12 h-12 flex items-center justify-center bg-primary rounded-full mb-4"
+            >
+              <i class="ri-map-pin-line ri-lg text-white"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-2">Southeast</h3>
+            <p class="text-gray-600 mb-2">
+              789 Hawthorne Blvd, Portland, OR 97214
+            </p>
+            <p class="text-gray-600 mb-4">
+              Monday - Friday: 6:30 AM - 7:00 PM<br />Saturday - Sunday: 7:00 AM
+              - 8:00 PM
+            </p>
+            <p class="text-gray-600 flex items-center">
+              <span class="w-6 h-6 flex items-center justify-center mr-2">
+                <i class="ri-phone-line text-primary"></i>
+              </span>
+              (503) 555-9012
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-primary text-white">
+      <div class="container mx-auto px-4 py-12">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Company Info -->
+          <div>
+            <h3 class="text-2xl font-['Pacifico'] mb-6">koka</h3>
+            <p class="mb-4">
+              Crafting premium cold brew coffee since 2020. Our mission is to
+              provide the best cold caffeine experience in a welcoming
+              environment.
+            </p>
+            <div class="flex space-x-4">
+              <a
+                href="#"
+                class="w-10 h-10 flex items-center justify-center bg-white bg-opacity-20 rounded-full hover:bg-opacity-30 transition-colors"
+              >
+                <i class="ri-instagram-line ri-lg"></i>
+              </a>
+              <a
+                href="#"
+                class="w-10 h-10 flex items-center justify-center bg-white bg-opacity-20 rounded-full hover:bg-opacity-30 transition-colors"
+              >
+                <i class="ri-facebook-fill ri-lg"></i>
+              </a>
+              <a
+                href="#"
+                class="w-10 h-10 flex items-center justify-center bg-white bg-opacity-20 rounded-full hover:bg-opacity-30 transition-colors"
+              >
+                <i class="ri-twitter-x-line ri-lg"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Quick Links -->
+          <div>
+            <h3 class="text-xl font-bold mb-6">Quick Links</h3>
+            <ul class="space-y-3">
+              <li><a href="#" class="hover:underline">Menu</a></li>
+              <li><a href="#" class="hover:underline">About Us</a></li>
+              <li><a href="#" class="hover:underline">Locations</a></li>
+              <li><a href="#" class="hover:underline">Careers</a></li>
+              <li><a href="#" class="hover:underline">Contact Us</a></li>
+            </ul>
+          </div>
+
+          <!-- Newsletter -->
+          <div>
+            <h3 class="text-xl font-bold mb-6">Stay Updated</h3>
+            <p class="mb-4">
+              Subscribe to our newsletter for promotions, new flavors, and
+              events.
+            </p>
+            <div class="flex">
+              <input
+                type="email"
+                placeholder="Your email address"
+                class="px-4 py-2 w-full text-gray-800 border-none !rounded-l-button focus:ring-0"
+              />
+              <button
+                class="bg-gray-800 text-white px-4 py-2 !rounded-r-button font-medium hover:bg-gray-700 transition-colors whitespace-nowrap"
+              >
+                Subscribe
+              </button>
+            </div>
+            <div class="mt-6">
+              <p class="text-sm">We accept:</p>
+              <div class="flex space-x-3 mt-2">
+                <i class="ri-visa-fill ri-lg"></i>
+                <i class="ri-mastercard-fill ri-lg"></i>
+                <i class="ri-paypal-fill ri-lg"></i>
+                <i class="ri-apple-fill ri-lg"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="border-t border-white border-opacity-20 mt-12 pt-6 text-center text-sm"
+        >
+          <p>&copy; 2025 Koka (Kold Caffeine). All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const mobileMenuButton = document.getElementById("mobile-menu-button");
+        const mobileMenu = document.getElementById("mobile-menu");
+
+        mobileMenuButton.addEventListener("click", function () {
+          mobileMenu.classList.toggle("hidden");
+          if (mobileMenu.classList.contains("hidden")) {
+            mobileMenuButton.innerHTML = '<i class="ri-menu-line ri-lg"></i>';
+          } else {
+            mobileMenuButton.innerHTML = '<i class="ri-close-line ri-lg"></i>';
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
