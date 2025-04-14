@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Koka - Kold Caffeine</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: { primary: "#FF0000", secondary: "#FFFFFF" },
+            borderRadius: {
+              none: "0px",
+              sm: "4px",
+              DEFAULT: "8px",
+              md: "12px",
+              lg: "16px",
+              xl: "20px",
+              "2xl": "24px",
+              "3xl": "32px",
+              full: "9999px",
+              button: "8px",
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <style>
+      :where([class^="ri-"])::before {
+        content: "\f3c2";
+      }
+      body {
+        font-family: "Montserrat", sans-serif;
+      }
+      .hero-section {
+        background-image: linear-gradient(
+            to right,
+            rgba(229, 62, 62, 0.85),
+            rgba(229, 62, 62, 0.6),
+            rgba(0, 0, 0, 0.2)
+          ),
+          url("https://readdy.ai/api/search-image?query=A%20cozy%20and%20warm%20coffee%20shop%20interior%20with%20wooden%20tables%2C%20comfortable%20chairs%2C%20and%20baristas%20working%20behind%20a%20counter.%20The%20space%20has%20warm%20lighting%2C%20plants%2C%20and%20a%20modern%20yet%20inviting%20atmosphere.%20The%20left%20side%20of%20the%20image%20has%20a%20gradient%20that%20smoothly%20transitions%20to%20a%20clean%20background%20for%20text%20overlay.&width=1920&height=800&seq=1&orientation=landscape");
+        background-size: cover;
+        background-position: center;
+      }
+      input:focus {
+        outline: none;
+      }
+      input[type="number"]::-webkit-inner-spin-button,
+      input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body class="bg-white">
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 bg-white shadow-md z-50">
+      <div
+        class="container mx-auto px-4 py-3 flex justify-between items-center"
+      >
+        <a href="#" class="text-primary text-3xl font-['Pacifico']">Koka</a>
+        <!-- Desktop Navigation -->
+        <nav class="hidden md:flex space-x-8">
+          <a
+            href="index.html"
+            data-readdy="true"
+            class="font-medium text-gray-800 hover:text-primary transition duration-300"
+            >Home</a
+          >
+          <a
+            href="menu.html"
+            class="font-medium text-gray-800 hover:text-primary transition duration-300"
+            >Menu</a
+          >
+          <a
+            href="location.html"
+            class="text-gray-800 font-medium hover:text-primary transition duration-300"
+            >Locations</a
+          >
+          <a
+            href="about.html"
+            class="text-gray-800 font-medium hover:text-primary border-b-2 border-primary text-primary transition duration-300"
+            >About Us</a
+          >
+        </nav>
+        <!-- Order Now Button (Desktop) -->
+        <button
+          class="hidden md:block bg-primary text-white px-6 py-2 font-semibold !rounded-button hover:bg-red-600 transition duration-300 whitespace-nowrap"
+        >
+          Order Now
+        </button>
+        <!-- Mobile Navigation Button -->
+        <div class="md:hidden">
+          <button
+            id="mobile-menu-button"
+            class="w-10 h-10 flex items-center justify-center text-gray-800"
+          >
+            <i class="ri-menu-line ri-lg"></i>
+          </button>
+        </div>
+      </div>
+      <!-- Mobile Navigation Menu -->
+      <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg">
+        <div class="container mx-auto px-4 py-3 flex flex-col space-y-4">
+          <a
+            href="index.html"
+            data-readdy="true"
+            class="text-gray-800 font-medium hover:text-primary transition duration-300"
+            >Home</a
+          >
+          <a
+            href="menu.html"
+            class="text-gray-800 font-medium hover:text-primary transition duration-300"
+            >Menu</a
+          >
+          <a
+            href="location.html"
+            class="text-gray-800 font-medium hover:text-primary transition duration-300"
+            >Locations</a
+          >
+          <a href="#" class="text-primary font-medium">About Us</a>
+          <button
+            class="bg-primary text-white px-6 py-2 font-semibold !rounded-button hover:bg-red-600 transition duration-300 whitespace-nowrap"
+          >
+            Order Now
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section pt-24 md:pt-32 h-[500px] flex items-center">
+      <div class="container mx-auto px-4">
+        <div class="max-w-2xl">
+          <h1 class="text-white text-4xl md:text-5xl font-bold mb-4">
+            Our Story
+          </h1>
+          <p class="text-white text-lg md:text-xl opacity-90">
+            Discover the passion and dedication behind every cup we serve
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Our Story Section -->
+    <section class="py-16 md:py-24 bg-white">
+      <div class="container mx-auto px-4">
+        <h2
+          class="text-primary text-3xl md:text-4xl font-bold text-center mb-16"
+        >
+          Brewing Perfection Since 2015
+        </h2>
+
+        <div class="grid md:grid-cols-2 gap-12 items-center mb-20">
+          <div>
+            <h3 class="text-2xl font-semibold mb-4 text-gray-800">
+              How It All Began
+            </h3>
+            <p class="text-gray-700 mb-4">
+              Koka Coffee was born from a simple yet profound love for
+              exceptional coffee. Our founder, Emma Chen, spent years traveling
+              across coffee-growing regions, from the highlands of Ethiopia to
+              the mountains of Colombia, developing a deep appreciation for the
+              craft of coffee making.
+            </p>
+            <p class="text-gray-700">
+              What started as a small cart in downtown Seattle has grown into a
+              beloved community space where quality coffee, meaningful
+              connections, and sustainability come together.
+            </p>
+          </div>
+          <div class="rounded-lg overflow-hidden shadow-lg">
+            <img
+              src="https://readdy.ai/api/search-image?query=A%20female%20coffee%20shop%20owner%20with%20Asian%20features%20smiling%20while%20carefully%20preparing%20coffee%20at%20a%20professional%20espresso%20machine.%20She%20is%20wearing%20a%20red%20apron%20with%20a%20small%20logo.%20The%20background%20shows%20a%20warm%2C%20inviting%20coffee%20shop%20interior%20with%20wooden%20elements%20and%20soft%20lighting.%20The%20image%20has%20professional%20quality%20with%20soft%20depth%20of%20field.&width=600&height=400&seq=2&orientation=landscape"
+              alt="Koka Coffee founder"
+              class="w-full h-full object-cover object-top"
+            />
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-12 items-center mb-20">
+          <div class="order-2 md:order-1 rounded-lg overflow-hidden shadow-lg">
+            <img
+              src="https://readdy.ai/api/search-image?query=Close-up%20of%20hands%20carefully%20pouring%20hot%20water%20over%20freshly%20ground%20coffee%20in%20a%20pour-over%20setup.%20The%20barista%20is%20wearing%20a%20red%20apron.%20Steam%20rises%20gently%20from%20the%20coffee.%20The%20background%20shows%20a%20blurred%20coffee%20shop%20interior%20with%20warm%20wooden%20tones.%20The%20image%20has%20a%20professional%20quality%20with%20excellent%20lighting%20highlighting%20the%20coffee-making%20process.&width=600&height=400&seq=3&orientation=landscape"
+              alt="Coffee brewing process"
+              class="w-full h-full object-cover object-top"
+            />
+          </div>
+          <div class="order-1 md:order-2">
+            <h3 class="text-2xl font-semibold mb-4 text-gray-800">
+              Our Coffee Philosophy
+            </h3>
+            <p class="text-gray-700 mb-4">
+              At Koka, we believe that great coffee is an art form. We
+              meticulously source our beans directly from farmers who share our
+              commitment to quality and sustainability. Each batch is roasted in
+              small quantities to ensure peak flavor and freshness.
+            </p>
+            <p class="text-gray-700">
+              Our baristas are trained in the science and craft of coffee
+              preparation, ensuring that every cup served meets our exacting
+              standards. We're not just selling coffee – we're sharing an
+              experience crafted with care and expertise.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="py-16 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <h2
+          class="text-primary text-3xl md:text-4xl font-bold text-center mb-16"
+        >
+          Our Core Values
+        </h2>
+
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="bg-white p-8 rounded shadow-md text-center">
+            <div
+              class="w-16 h-16 mx-auto mb-6 bg-primary bg-opacity-10 rounded-full flex items-center justify-center"
+            >
+              <i class="ri-leaf-line ri-2x text-primary"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-3 text-gray-800">
+              Sustainability
+            </h3>
+            <p class="text-gray-700">
+              We are committed to environmentally responsible practices, from
+              sourcing to serving. Our packaging is compostable, and we actively
+              work to reduce our carbon footprint.
+            </p>
+          </div>
+
+          <div class="bg-white p-8 rounded shadow-md text-center">
+            <div
+              class="w-16 h-16 mx-auto mb-6 bg-primary bg-opacity-10 rounded-full flex items-center justify-center"
+            >
+              <i class="ri-cup-line ri-2x text-primary"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-3 text-gray-800">Quality</h3>
+            <p class="text-gray-700">
+              We never compromise on quality. From bean selection to brewing
+              techniques, every step is executed with precision and care to
+              deliver an exceptional coffee experience.
+            </p>
+          </div>
+
+          <div class="bg-white p-8 rounded shadow-md text-center">
+            <div
+              class="w-16 h-16 mx-auto mb-6 bg-primary bg-opacity-10 rounded-full flex items-center justify-center"
+            >
+              <i class="ri-heart-line ri-2x text-primary"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-3 text-gray-800">Community</h3>
+            <p class="text-gray-700">
+              Koka is more than a coffee shop – it's a gathering place. We
+              foster connections among our customers and give back to the
+              communities that support us.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="py-16 md:py-24 bg-white">
+      <div class="container mx-auto px-4">
+        <h2
+          class="text-primary text-3xl md:text-4xl font-bold text-center mb-16"
+        >
+          Meet Our Team
+        </h2>
+
+        <div class="grid md:grid-cols-4 gap-8">
+          <div class="text-center">
+            <div
+              class="w-48 h-48 mx-auto mb-4 rounded-full overflow-hidden border-4 border-primary"
+            >
+              <img
+                src="https://readdy.ai/api/search-image?query=Professional%20headshot%20of%20an%20Asian%20woman%20in%20her%2030s%20with%20shoulder-length%20black%20hair%2C%20wearing%20a%20red%20shirt%20or%20blouse.%20She%20has%20a%20warm%2C%20confident%20smile.%20The%20photo%20has%20a%20clean%2C%20simple%20background%20and%20professional%20studio%20lighting.%20The%20image%20is%20high%20quality%20and%20suitable%20for%20a%20business%20profile.&width=300&height=300&seq=4&orientation=squarish"
+                alt="Emma Chen"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <h3 class="text-xl font-semibold text-primary mb-1">Emma Chen</h3>
+            <p class="text-gray-700">Founder & Head Roaster</p>
+          </div>
+
+          <div class="text-center">
+            <div
+              class="w-48 h-48 mx-auto mb-4 rounded-full overflow-hidden border-4 border-primary"
+            >
+              <img
+                src="https://readdy.ai/api/search-image?query=Professional%20headshot%20of%20a%20Black%20man%20in%20his%20late%2020s%20with%20short%20hair%20and%20a%20neatly%20trimmed%20beard%2C%20wearing%20a%20red%20shirt%20or%20polo.%20He%20has%20a%20friendly%2C%20approachable%20smile.%20The%20photo%20has%20a%20clean%2C%20simple%20background%20and%20professional%20studio%20lighting.%20The%20image%20is%20high%20quality%20and%20suitable%20for%20a%20business%20profile.&width=300&height=300&seq=5&orientation=squarish"
+                alt="Marcus Johnson"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <h3 class="text-xl font-semibold text-primary mb-1">
+              Marcus Johnson
+            </h3>
+            <p class="text-gray-700">Master Barista</p>
+          </div>
+
+          <div class="text-center">
+            <div
+              class="w-48 h-48 mx-auto mb-4 rounded-full overflow-hidden border-4 border-primary"
+            >
+              <img
+                src="https://readdy.ai/api/search-image?query=Professional%20headshot%20of%20a%20Latina%20woman%20in%20her%20mid-20s%20with%20long%20brown%20hair%2C%20wearing%20a%20red%20shirt%20or%20blouse.%20She%20has%20a%20warm%2C%20engaging%20smile.%20The%20photo%20has%20a%20clean%2C%20simple%20background%20and%20professional%20studio%20lighting.%20The%20image%20is%20high%20quality%20and%20suitable%20for%20a%20business%20profile.&width=300&height=300&seq=6&orientation=squarish"
+                alt="Sofia Ramirez"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <h3 class="text-xl font-semibold text-primary mb-1">
+              Sofia Ramirez
+            </h3>
+            <p class="text-gray-700">Café Manager</p>
+          </div>
+
+          <div class="text-center">
+            <div
+              class="w-48 h-48 mx-auto mb-4 rounded-full overflow-hidden border-4 border-primary"
+            >
+              <img
+                src="https://readdy.ai/api/search-image?query=Professional%20headshot%20of%20a%20Caucasian%20man%20in%20his%20early%2030s%20with%20light%20brown%20hair%2C%20wearing%20a%20red%20shirt%20or%20button-up.%20He%20has%20a%20friendly%2C%20professional%20smile.%20The%20photo%20has%20a%20clean%2C%20simple%20background%20and%20professional%20studio%20lighting.%20The%20image%20is%20high%20quality%20and%20suitable%20for%20a%20business%20profile.&width=300&height=300&seq=7&orientation=squarish"
+                alt="David Miller"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <h3 class="text-xl font-semibold text-primary mb-1">
+              David Miller
+            </h3>
+            <p class="text-gray-700">Coffee Educator</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mission Statement -->
+    <section class="py-16 bg-gray-50">
+      <div class="container mx-auto px-4 max-w-4xl">
+        <div class="text-center">
+          <i class="ri-double-quotes-l ri-3x text-primary mb-6"></i>
+          <p class="text-2xl md:text-3xl font-medium text-gray-800 mb-8">
+            Our mission is to create exceptional coffee experiences that bring
+            people together, support sustainable practices, and celebrate the
+            art and science of coffee making.
+          </p>
+          <div class="w-24 h-1 bg-primary mx-auto"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Visit Us Section -->
+    <section class="py-16 md:py-24 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+          <div>
+            <h2 class="text-primary text-3xl md:text-4xl font-bold mb-6">
+              Visit Us Today
+            </h2>
+            <p class="text-gray-700 mb-8">
+              We'd love to welcome you to our coffee shop and share our passion
+              for great coffee with you. Stop by for a cup, stay for the
+              atmosphere, and become part of our community.
+            </p>
+
+            <div class="mb-6">
+              <h3 class="text-xl font-semibold mb-3 text-gray-800">
+                Opening Hours
+              </h3>
+              <ul class="text-gray-700">
+                <li class="mb-2">Monday - Friday: 6:30 AM - 8:00 PM</li>
+                <li class="mb-2">Saturday: 7:00 AM - 9:00 PM</li>
+                <li>Sunday: 8:00 AM - 6:00 PM</li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 class="text-xl font-semibold mb-3 text-gray-800">Location</h3>
+              <p class="text-gray-700 mb-4">
+                1234 Coffee Lane, Seattle, WA 98101
+              </p>
+              <a
+                href="#"
+                class="inline-block bg-primary text-white px-6 py-3 font-medium !rounded-button hover:bg-opacity-90 transition-colors whitespace-nowrap"
+                >Get Directions</a
+              >
+            </div>
+          </div>
+
+          <div class="rounded-lg overflow-hidden shadow-lg">
+            <img
+              src="https://readdy.ai/api/search-image?query=Exterior%20view%20of%20a%20modern%20coffee%20shop%20with%20large%20windows%20and%20a%20red%20awning%20or%20sign.%20The%20shop%20has%20an%20inviting%20entrance%20with%20some%20outdoor%20seating.%20The%20time%20of%20day%20is%20daytime%20with%20good%20natural%20lighting.%20The%20storefront%20has%20a%20clean%2C%20contemporary%20design%20that%20looks%20welcoming%20to%20customers.%20The%20image%20has%20professional%20quality%20with%20good%20composition.&width=600&height=400&seq=8&orientation=landscape"
+              alt="Koka Coffee Shop Exterior"
+              class="w-full h-full object-cover object-top"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-primary text-white">
+      <div class="container mx-auto px-4 py-12">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Company Info -->
+          <div>
+            <h3 class="text-2xl font-['Pacifico'] mb-6">koka</h3>
+            <p class="mb-4">
+              Crafting premium cold brew coffee since 2020. Our mission is to
+              provide the best cold caffeine experience in a welcoming
+              environment.
+            </p>
+            <div class="flex space-x-4">
+              <a
+                href="#"
+                class="w-10 h-10 flex items-center justify-center bg-white bg-opacity-20 rounded-full hover:bg-opacity-30 transition-colors"
+              >
+                <i class="ri-instagram-line ri-lg"></i>
+              </a>
+              <a
+                href="#"
+                class="w-10 h-10 flex items-center justify-center bg-white bg-opacity-20 rounded-full hover:bg-opacity-30 transition-colors"
+              >
+                <i class="ri-facebook-fill ri-lg"></i>
+              </a>
+              <a
+                href="#"
+                class="w-10 h-10 flex items-center justify-center bg-white bg-opacity-20 rounded-full hover:bg-opacity-30 transition-colors"
+              >
+                <i class="ri-twitter-x-line ri-lg"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Quick Links -->
+          <div>
+            <h3 class="text-xl font-bold mb-6">Quick Links</h3>
+            <ul class="space-y-3">
+              <li><a href="#" class="hover:underline">Menu</a></li>
+              <li><a href="#" class="hover:underline">About Us</a></li>
+              <li><a href="#" class="hover:underline">Locations</a></li>
+              <li><a href="#" class="hover:underline">Careers</a></li>
+              <li><a href="#" class="hover:underline">Contact Us</a></li>
+            </ul>
+          </div>
+
+          <!-- Newsletter -->
+          <div>
+            <h3 class="text-xl font-bold mb-6">Stay Updated</h3>
+            <p class="mb-4">
+              Subscribe to our newsletter for promotions, new flavors, and
+              events.
+            </p>
+            <div class="flex">
+              <input
+                type="email"
+                placeholder="Your email address"
+                class="px-4 py-2 w-full text-gray-800 border-none !rounded-l-button focus:ring-0"
+              />
+              <button
+                class="bg-gray-800 text-white px-4 py-2 !rounded-r-button font-medium hover:bg-gray-700 transition-colors whitespace-nowrap"
+              >
+                Subscribe
+              </button>
+            </div>
+            <div class="mt-6">
+              <p class="text-sm">We accept:</p>
+              <div class="flex space-x-3 mt-2">
+                <i class="ri-visa-fill ri-lg"></i>
+                <i class="ri-mastercard-fill ri-lg"></i>
+                <i class="ri-paypal-fill ri-lg"></i>
+                <i class="ri-apple-fill ri-lg"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="border-t border-white border-opacity-20 mt-12 pt-6 text-center text-sm"
+        >
+          <p>&copy; 2025 Koka (Kold Caffeine). All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const mobileMenuButton = document.getElementById("mobile-menu-button");
+        const mobileMenu = document.getElementById("mobile-menu");
+
+        mobileMenuButton.addEventListener("click", function () {
+          mobileMenu.classList.toggle("hidden");
+          if (mobileMenu.classList.contains("hidden")) {
+            mobileMenuButton.innerHTML = '<i class="ri-menu-line ri-lg"></i>';
+          } else {
+            mobileMenuButton.innerHTML = '<i class="ri-close-line ri-lg"></i>';
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
